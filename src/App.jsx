@@ -4,6 +4,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "./supabaseClient";
 
 import Nav from "./components/Nav";
+import Login from "./components/Login";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -24,16 +25,8 @@ function App() {
 
   return (
     <>
-      {session ? (
-        <div>Logged in!</div>
-      ) : (
-        <Auth
-        supabaseClient={supabase}
-        appearance={{ theme: ThemeSupa }}
-        providers={[]}/>
-        
-      )}
-      <Nav setSession={setSession} />
+      <Nav setSession={setSession} session={session} />
+      <Login/>
     </>
   );
 }

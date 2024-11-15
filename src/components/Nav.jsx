@@ -3,7 +3,7 @@ import { useEffect } from "react";
 function Nav({ setSession, session }) {
   useEffect(() => {
     if(session){
-      
+      console.log(session.user.email)
       document.getElementById('login').close()
     }
   }, [session]);
@@ -21,15 +21,17 @@ function Nav({ setSession, session }) {
             Log in / Sign Up
           </a>
         ) : (
-          <a
-            className="btn"
-            onClick={() => {
-              setSession(null);
-              localStorage.clear();
-            }}
-          >
-            Log Out
-          </a>
+          <div className="flex gap-2">
+            <p className="flex items-center">{session.user.email.split('@')[0]}</p>
+            <a
+              className="btn"
+              onClick={() => {
+                setSession(null);
+              }}
+            >
+              Log Out
+            </a>
+          </div>
         )}
       </div>
     </div>

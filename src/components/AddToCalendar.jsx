@@ -1,20 +1,26 @@
-function AddToCalendar({ title, startDateTime, endDateTime, description, location }) {
-    const handleAddToCalendar = () => {
-        // Format the start and end datetime to Google Calendar format YYYYMMDDTHHmmSSZ
-        // This might not be necessary
-        const formattedStart = startDateTime.toISOString().replace(/-|:|\.\d\d\d/g, '');
-        const formattedEnd = endDateTime.toISOString().replace(/-|:|\.\d\d\d/g, '');
+function AddToCalendar({ event }) {
+  const { title, start_datetime, end_datetime, description, location, id } =
+    event;
 
-        
-        const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(title)}&dates=${formattedStart}/${formattedEnd}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+  const handleAddToCalendar = () => {
+    const formattedStart = start_datetime.replace(/-|:|\.\d\d\d/g, "");
+    const formattedEnd = end_datetime.replace(/-|:|\.\d\d\d/g, "");
+    const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${title}&dates=${formattedStart}/${formattedEnd}&details=${description}&location=${location}`;
 
-        window.open(calendarUrl, '_blank');
-    };
+    window.open(calendarUrl, "_blank");
+  };
 
-    return (
-        <button onClick={handleAddToCalendar}>
-            Add to Google Calendar
-        </button>
-    );
+  return (
+    <button
+      id="AddToCalendar"
+      className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
+      onClick={() => {
+        console.log(`Add to Calendar clicked for ${id}`);
+        handleAddToCalendar();
+      }}
+    >
+      Add to Calendar
+    </button>
+  );
 }
-export default AddToCalendar
+export default AddToCalendar;

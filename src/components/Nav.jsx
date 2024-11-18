@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Nav({ setSession, session }) {
   useEffect(() => {
@@ -7,9 +8,10 @@ function Nav({ setSession, session }) {
       document.getElementById('login').close()
     }
   }, [session]);
+  const navigate = useNavigate()
   return (
     <div className="flex justify-between">
-      <h1 className="text-5xl">EventLite</h1>
+      <h1 className="text-5xl cursor-pointer" onClick={()=>{navigate('/')}}>EventLite</h1>
       <div className="p-2">
         {!session ? (
           <a

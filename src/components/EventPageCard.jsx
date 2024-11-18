@@ -1,17 +1,10 @@
-// TODO:
-// add navigate to event page onClick
-// link signup to supabase insert
-// link add to cal to google cal api
-// useState to manage signedUp / added to calendar?
-// conditionally render 'edit' btn if current user === event author
-
 import { useNavigate } from "react-router-dom";
 import { formatDuration } from "../../utils/FormatDuration";
 import AddToCalendar from "./AddToCalendar";
 import SignUp from "./SignUp";
 
-// --> edit event page / dialogue
-function EventCard({ event }) {
+
+function EventPageCard({eventData}) {
   const {
     title,
     description,
@@ -20,7 +13,7 @@ function EventCard({ event }) {
     img_url,
     author,
     id,
-  } = event;
+  } = eventData;
   const [start_date, start_time] = start_datetime.split("T");
   const duration = formatDuration(start_datetime, end_datetime)
   const navigate = useNavigate()
@@ -45,11 +38,11 @@ function EventCard({ event }) {
       <div className="absolute inset-0 bg-black bg-opacity-20 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg ">
         <div className="flex gap-2  self-end">
           <SignUp id={id} duration={duration}/>
-          <AddToCalendar event={event} />
+          <AddToCalendar event={eventData} />
         </div>
       </div>
     </div>
   );
 }
 
-export default EventCard;
+export default EventPageCard;

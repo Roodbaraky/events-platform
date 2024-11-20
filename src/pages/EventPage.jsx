@@ -22,7 +22,11 @@ function EventPage() {
 
     getEventData();
   }, [id]);
-  return <>{eventData!=null ? <EventPageCard eventData={eventData} /> : <></>}</>;
+  return (
+    <section className="p-4">
+      {eventData != null ? <EventPageCard eventData={eventData} /> : <></>}
+    </section>
+  );
 }
 
 export default EventPage;

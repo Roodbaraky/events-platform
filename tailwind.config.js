@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio:{
+        'ultraCinematic': '32 / 9'
+      }
+    },
   },
   plugins: [daisyui],
 }

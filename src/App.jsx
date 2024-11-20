@@ -43,14 +43,14 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main className="w-full">
       <Nav setSession={setSession} session={session} />
       <Login />
       <Routes>
         <Route path="/" element={<Events events={events} />} />
         <Route path="/:title/:id" element={<EventPage />} />
       </Routes>
-    </>
+    </main>
   );
 }
 

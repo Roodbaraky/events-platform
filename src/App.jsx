@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Nav from "./components/Nav";
 import EventPage from "./pages/EventPage";
 import { supabase } from "./supabaseClient";
+import EditPage from "./pages/EditPage";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -49,6 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Events events={events} />} />
         <Route path="/:title/:id" element={<EventPage />} />
+        <Route path="/:title/:id/edit" element={<EditPage/>}/>
       </Routes>
     </main>
   );

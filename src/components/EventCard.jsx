@@ -7,8 +7,8 @@
 
 import { useNavigate } from "react-router-dom";
 import { formatDuration } from "../../utils/FormatDuration";
-import AddToCalendar from "./AddToCalendar";
-import SignUp from "./SignUp";
+import AddToCalendar from "./AddToCalendarBtn";
+import SignUp from "./SignUpBtn";
 
 // --> edit event page / dialogue
 function EventCard({ event }) {

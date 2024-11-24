@@ -4,7 +4,6 @@ import Events from "./components/Events";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
 import CreateEventPage from "./pages/CreateEventPage";
-import EditPage from "./pages/EditPage";
 import EventPage from "./pages/EventPage";
 import { supabase } from "./supabaseClient";
 
@@ -51,7 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Events events={events} />} />
         <Route path="/:title/:id" element={<EventPage />} />
-        <Route path="/:title/:id/edit" element={<EditPage />} />
+        <Route path="/:title/:id/edit" element={<CreateEventPage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
       </Routes>
     </main>

@@ -68,4 +68,4 @@ function EventPageCard({ eventData }) {
 }
 
 export default EventPageCard;
-// finish updating this and commit
+

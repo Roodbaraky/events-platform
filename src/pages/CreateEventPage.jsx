@@ -1,21 +1,72 @@
 import { useForm } from "react-hook-form";
-import { supabase } from "../supabaseClient"; // Supabase client initialization
+import { supabase } from "../supabaseClient";
 import { useSession } from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+//fix with upsert in place of insert, otherwise working
 function CreateEventPage() {
+  const { id } = useParams();
   const { session } = useSession();
-  const author = session.user.email.split("@")[0];
+  const author = session?.user?.email.split("@")[0];
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(!!id);
+
+  useEffect(() => {
+    console.log(session);
+    console.log(id);
+    if (id) {
+      const fetchEventData = async () => {
+        const { data, error } = await supabase
+          .from("events")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching event data:", error.message);
+          alert("Failed to load event data.");
+        } else if (data) {
+          Object.keys(data).forEach((key) => setValue(key, data[key]));
+          setIsLoading(false);
+        }
+      };
+
+      fetchEventData();
+    }
+  }, [id, session, setValue]);
 
   const onSubmit = async (data) => {
     try {
+      if (id) {
+        const { error } = await supabase
+          .from("events")
+          .update({
+            title: data.title,
+            img_url: data.img_url,
+            location: data.location,
+            description: data.description,
+            start_datetime: data.start_datetime,
+            end_datetime: data.end_datetime,
+          })
+          .eq("id", id);
+
+        if (error) {
+          console.error("Error updating event:", error.message);
+          alert("Failed to update event. Please try again.");
+        } else {
+          alert("Event updated successfully!");
+          navigate(`/event/${id}`);
+        }
+        return;
+      }
+
       const {
         title,
         img_url,
@@ -45,6 +96,14 @@ function CreateEventPage() {
         alert("Failed to create event. Please try again.");
       } else {
         const newEventID = insertedData[0]?.id;
+        const { error: errorUserEvents } = await supabase
+          .from("user_events")
+          .insert([{ id: session.user.id, event_id: newEventID }])
+
+        if (errorUserEvents) {
+          console.error("Error creating event:", error.message);
+          alert("Failed to update user_events. Please try again.");
+        }
         alert("Event created successfully!");
         if (newEventID) {
           navigate(`/${title}/${newEventID}`);
@@ -163,7 +222,7 @@ function CreateEventPage() {
           type="submit"
           className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
         >
-          Create Event
+          {id ? "Save Changes" : "Create Event"}
         </button>
       </form>
     </div>

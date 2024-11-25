@@ -6,7 +6,8 @@ import Nav from "./components/Nav";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventPage from "./pages/EventPage";
 import { supabase } from "./supabaseClient";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient()
 function App() {
   const [session, setSession] = useState(null);
   const [events, setEvents] = useState([]);
@@ -44,7 +45,9 @@ function App() {
   }, []);
 
   return (
-    <main className="w-full">
+    <QueryClientProvider client={queryClient}>
+
+    <main className="w-full mx-auto">
       <Nav setSession={setSession} session={session} />
       <Login />
       <Routes>
@@ -54,6 +57,7 @@ function App() {
         <Route path="/create-event" element={<CreateEventPage />} />
       </Routes>
     </main>
+    </QueryClientProvider>
   );
 }
 

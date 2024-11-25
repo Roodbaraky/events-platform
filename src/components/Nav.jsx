@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 function Nav({ setSession, session }) {
@@ -10,8 +11,9 @@ function Nav({ setSession, session }) {
   }, [session]);
   const navigate = useNavigate()
   return (
-    <div className="flex justify-between">
-      <h1 className="text-5xl cursor-pointer" onClick={()=>{navigate('/')}}>EventLite</h1>
+    <div className="flex sm:flex-row justify-between items-center">
+      <h1 className="hidden text-5xl cursor-pointer sm:block px-2" onClick={()=>{navigate('/')}}>EventLite</h1>
+      <div className="px-4" onClick={()=>{navigate('/')}}><BiHome className="scale-150 px- sm:hidden pointer-events-none" /></div>
       <div className="p-2">
         {!session ? (
           <a

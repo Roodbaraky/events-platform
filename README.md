@@ -1,8 +1,18 @@
-# React + Vite
+# EventLite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## TODO:
+- fix role check for administrator
+- **responsive design** - fix mobile view
+- **accessibility** - scan with lightpost, fix errors
+- clearly communicate errors - **error pages & notifs**
+- **loading states** - get a loader
+- actually use Google Auth?
+- "security best practices for **user authentication**" ?
+- host the thing
 
-Currently, two official plugins are available:
+## Summary
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Test Accounts
+
+## Installation / How to run
+

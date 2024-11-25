@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { supabase } from "../supabaseClient";
-import { useSession } from "../contexts/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-//fix with upsert in place of insert, otherwise working
+import { useSession } from "../contexts/UserContext";
+import { supabase } from "../supabaseClient";
+
+
 function CreateEventPage() {
   const { id } = useParams();
   const { session } = useSession();
@@ -16,7 +17,6 @@ function CreateEventPage() {
     setValue,
   } = useForm();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(!!id);
 
   useEffect(() => {
     console.log(session);
@@ -34,7 +34,6 @@ function CreateEventPage() {
           alert("Failed to load event data.");
         } else if (data) {
           Object.keys(data).forEach((key) => setValue(key, data[key]));
-          setIsLoading(false);
         }
       };
 
@@ -96,14 +95,6 @@ function CreateEventPage() {
         alert("Failed to create event. Please try again.");
       } else {
         const newEventID = insertedData[0]?.id;
-        const { error: errorUserEvents } = await supabase
-          .from("user_events")
-          .insert([{ id: session.user.id, event_id: newEventID }])
-
-        if (errorUserEvents) {
-          console.error("Error creating event:", error.message);
-          alert("Failed to update user_events. Please try again.");
-        }
         alert("Event created successfully!");
         if (newEventID) {
           navigate(`/${title}/${newEventID}`);

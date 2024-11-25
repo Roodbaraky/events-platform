@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { useSession } from "../contexts/UserContext";
+import { supabase } from "../supabaseClient";
 
-function Nav({ setSession, session }) {
+function Nav() {
+  const { session, setSession } = useSession();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (session) {
       console.log(session.user.email);
       document.getElementById("login").close();
     }
   }, [session]);
-  const navigate = useNavigate();
+
   return (
     <div className="flex sm:flex-row justify-between items-center">
       <h1
@@ -46,7 +51,7 @@ function Nav({ setSession, session }) {
             <a
               className="btn"
               onClick={() => {
-                setSession(null);
+                supabase.auth.signOut().then(() => setSession(null));
               }}
             >
               Log Out

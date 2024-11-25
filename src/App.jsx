@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import Events from "./components/Events";
 import Login from "./components/Login";
@@ -6,58 +6,55 @@ import Nav from "./components/Nav";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventPage from "./pages/EventPage";
 import { supabase } from "./supabaseClient";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-const queryClient = new QueryClient()
+
 function App() {
-  const [session, setSession] = useState(null);
-  const [events, setEvents] = useState([]);
-  useEffect(() => {
-    const getEvents = async () => {
+  const {
+    data: events,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: async () => {
       const { data, error } = await supabase.from("events").select("*");
-
       if (error) {
-        console.error("Error fetching events:", error);
-      } else {
-        console.log(data);
-        setEvents(data);
+        throw new Error(error.message);
       }
-    };
+      return data;
+    },
+  });
 
-    getEvents();
-  }, []);
-
-  useEffect(() => {
-    console.log("Events updated:", events);
-  }, [events]);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  if (isError) {
+    console.error("Error fetching events:", error);
+    return (
+      <p className="text-red-500">
+        Failed to load events. Please try again later.
+      </p>
+    );
+  }
 
   return (
-    <QueryClientProvider client={queryClient}>
-
     <main className="w-full mx-auto">
-      <Nav setSession={setSession} session={session} />
+      <Nav />
       <Login />
       <Routes>
-        <Route path="/" element={<Events events={events} />} />
+        <Route
+          path="/"
+          element={
+            isLoading ? (
+              <div className="flex justify-center items-center h-screen">
+                <div className=" loading loading-spinner rounded-full w-16 h-16"></div>
+              </div>
+            ) : (
+              <Events events={events} />
+            )
+          }
+        />
         <Route path="/:title/:id" element={<EventPage />} />
         <Route path="/:title/:id/edit" element={<CreateEventPage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
       </Routes>
     </main>
-    </QueryClientProvider>
   );
 }
 

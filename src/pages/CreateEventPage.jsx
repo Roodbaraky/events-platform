@@ -51,6 +51,7 @@ function CreateEventPage() {
             img_url: data.img_url,
             location: data.location,
             description: data.description,
+            body:data.body,
             start_datetime: data.start_datetime,
             end_datetime: data.end_datetime,
           })
@@ -71,6 +72,7 @@ function CreateEventPage() {
         img_url,
         location,
         description,
+        body,
         start_datetime,
         end_datetime,
       } = data;
@@ -83,6 +85,7 @@ function CreateEventPage() {
             img_url,
             location,
             description,
+            body,
             start_datetime,
             end_datetime,
             author,
@@ -155,21 +158,35 @@ function CreateEventPage() {
         </div>
 
         <div>
-          <label className="block font-semibold">Event Description</label>
+          <label className="block font-semibold">Event Blurb</label>
           <textarea
             {...register("description", {
-              required: "Description is required",
+              required: "Blurb is required",
             })}
             className={`p-2 rounded w-full border ${
               errors.description ? "border-red-500" : "border-gray-300"
             }`}
-            rows="4"
+            rows="1"
           />
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
           )}
         </div>
-
+        <div>
+          <label className="block font-semibold">Event Description</label>
+          <textarea
+            {...register("body", {
+              required: "Description is required",
+            })}
+            className={`p-2 rounded w-full border ${
+              errors.body ? "border-red-500" : "border-gray-300"
+            }`}
+            rows="4"
+          />
+          {errors.body && (
+            <p className="text-red-500 text-sm">{errors.body.message}</p>
+          )}
+        </div>
         <div>
           <label className="block font-semibold">Start Date & Time</label>
           <input
@@ -187,6 +204,7 @@ function CreateEventPage() {
             </p>
           )}
         </div>
+        
 
         <div>
           <label className="block font-semibold">End Date & Time</label>

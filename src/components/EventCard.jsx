@@ -27,7 +27,7 @@ function EventCard({ event }) {
 
   return (
     <div
-      className="relative rounded-lg flex w-40 min-h-56 border border-gray-400 flex-col justify-center items-center transition-all ease-in-out duration-300 cursor-pointer group"
+      className="relative rounded-lg flex min-w-40 w-full min-h-56 border border-gray-400 flex-col justify-center items-center transition-all ease-in-out duration-300 cursor-pointer group"
       onClick={(e) => {
         if (!["signup", "AddToCalendar"].includes(e.target.id)) {
           console.log("clicked");
@@ -36,7 +36,7 @@ function EventCard({ event }) {
       }}
     >
       <h2 className="font-semibold">{title}</h2>
-      <img className="w-32 h-24 object-contain" src={img_url} alt={title} />
+      <img className="w-72 h-40 object-cover" src={img_url} alt={`Image of ${title}: ${description}`} />
       <p className="text-wrap text-sm">{description}</p>
       <p className="text-xs">{start_date}</p>
       <p className="text-xs">{start_time}</p>

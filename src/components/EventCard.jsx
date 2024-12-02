@@ -27,7 +27,7 @@ function EventCard({ event }) {
 
   return (
     <div
-      className="relative rounded-lg flex w-40 border border-gray-400 flex-col justify-center items-center transition-all ease-in-out duration-300 cursor-pointer group"
+      className="relative rounded-lg flex w-40 min-h-56 border border-gray-400 flex-col justify-center items-center transition-all ease-in-out duration-300 cursor-pointer group"
       onClick={(e) => {
         if (!["signup", "AddToCalendar"].includes(e.target.id)) {
           console.log("clicked");

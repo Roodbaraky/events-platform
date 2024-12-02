@@ -35,7 +35,7 @@ function App() {
 
   return (
     <main className="w-full mx-auto">
-      <Nav />
+      <Nav className="sticky"/>
       <Login />
       <Routes>
         <Route

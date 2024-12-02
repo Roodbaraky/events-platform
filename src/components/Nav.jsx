@@ -16,9 +16,9 @@ function Nav() {
   }, [session]);
 
   return (
-    <div className="flex sm:flex-row justify-between items-center">
+    <div className="flex sm:flex-row justify-between items-center sticky top-0 z-10 bg-base-100">
       <h1
-        className="hidden text-5xl cursor-pointer sm:block px-2"
+        className="hidden text-5xl cursor-pointer sm:flex px-2"
         onClick={() => {
           navigate("/");
         }}
@@ -26,7 +26,7 @@ function Nav() {
         EventLite
       </h1>
       <div
-        className="px-4 btn  sm:hidden"
+        className="px-4 btn  sm:hidden mx-1"
         onClick={() => {
           navigate("/");
         }}

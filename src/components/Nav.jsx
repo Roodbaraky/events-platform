@@ -26,12 +26,12 @@ function Nav() {
         EventLite
       </h1>
       <div
-        className="px-4 btn"
+        className="px-4 btn  sm:hidden"
         onClick={() => {
           navigate("/");
         }}
       >
-        <BiHome className="scale-150 px- sm:hidden pointer-events-none" />
+        <BiHome className="scale-150  pointer-events-none" />
       </div>
       <div className="p-2">
         {!session ? (

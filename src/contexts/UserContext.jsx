@@ -1,11 +1,12 @@
-import  { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [session, setSession] = useState(null);
-
+  const [session, setSession] = useState(null); 
+  const [googleAccessToken, setGoogleAccessToken] = useState(null); 
 
 
   useEffect(() => {
@@ -19,7 +20,6 @@ export const UserProvider = ({ children }) => {
         console.error("Error fetching session:", error);
       } else {
         setSession(session);
-        
       }
     };
 
@@ -34,8 +34,18 @@ export const UserProvider = ({ children }) => {
     };
   }, []);
 
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: (response) => {
+      setGoogleAccessToken(response.access_token);
+      console.log("Google login successful!");
+    },
+    onError: () => {
+      alert("Failed to log in with Google. Please try again.");
+    },
+  });
+
   return (
-    <UserContext.Provider value={{ session }}>
+    <UserContext.Provider value={{ session, googleAccessToken, loginWithGoogle }}>
       {children}
     </UserContext.Provider>
   );
@@ -44,9 +54,7 @@ export const UserProvider = ({ children }) => {
 export const useSession = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error(
-      "useUser must be used within a UserProvider"
-    );
+    throw new Error("useSession must be used within a UserProvider");
   }
   return context;
 };

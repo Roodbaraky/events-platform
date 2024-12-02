@@ -1,12 +1,22 @@
-function AddToCalendar({ event }) {
-  const { title, start_datetime, end_datetime, description, location, id } =
-    event;
 
-  const handleAddToCalendar = () => {
+import { useSession } from "../contexts/UserContext";
+
+function AddToCalendar({ event }) {
+  const { title, start_datetime, end_datetime, description, location, id } = event;
+  const { googleAccessToken, loginWithGoogle } = useSession();
+
+  const getCalendarUrl = () => {
     const formattedStart = start_datetime.replace(/-|:|\.\d\d\d/g, "");
     const formattedEnd = end_datetime.replace(/-|:|\.\d\d\d/g, "");
-    const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${title}&dates=${formattedStart}/${formattedEnd}&details=${description}&location=${location}`;
+    return `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
+      title
+    )}&dates=${formattedStart}/${formattedEnd}&details=${encodeURIComponent(
+      description
+    )}&location=${encodeURIComponent(location)}`;
+  };
 
+  const handleAddToCalendar = () => {
+    const calendarUrl = getCalendarUrl();
     window.open(calendarUrl, "_blank");
   };
 
@@ -15,12 +25,16 @@ function AddToCalendar({ event }) {
       id="AddToCalendar"
       className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
       onClick={() => {
-        console.log(`Add to Calendar clicked for ${id}`);
-        handleAddToCalendar();
+        if (googleAccessToken) {
+          handleAddToCalendar();
+        } else {
+          loginWithGoogle();
+        }
       }}
     >
       Add to Calendar
     </button>
   );
 }
+
 export default AddToCalendar;

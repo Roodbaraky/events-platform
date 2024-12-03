@@ -12,7 +12,7 @@ function EventPageSignupControls({eventData, session}) {
     <div className="flex self-start gap-2">
               <SignUp id={id} duration={duration} />
               <AddToCalendar event={eventData} />
-              {session.user.email.split("@")[0] == author && <EditBtn />}
+              {session?.user?.email?.split("@")[0] == author && <EditBtn />}
             </div>
   )
 }

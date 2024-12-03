@@ -45,7 +45,7 @@ export const UserProvider = ({ children }) => {
   });
 
   return (
-    <UserContext.Provider value={{ session, googleAccessToken, loginWithGoogle }}>
+    <UserContext.Provider value={{ session, setSession, googleAccessToken, loginWithGoogle }}>
       {children}
     </UserContext.Provider>
   );

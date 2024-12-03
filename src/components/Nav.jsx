@@ -50,8 +50,11 @@ function Nav() {
             </p>
             <a
               className="btn"
-              onClick={() => {
-                supabase.auth.signOut().then(() => setSession(null));
+              onClick={async () => {
+                await supabase.auth.signOut()
+                setSession(null)
+                navigate('/')
+                
               }}
             >
               Log Out

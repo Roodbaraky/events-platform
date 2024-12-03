@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSession } from "../contexts/UserContext";
 import { supabase } from "../supabaseClient";
 
-
 function CreateEventPage() {
   const { id } = useParams();
   const { session } = useSession();
@@ -17,10 +16,23 @@ function CreateEventPage() {
     setValue,
   } = useForm();
   const navigate = useNavigate();
-
   useEffect(() => {
-    console.log(session);
-    console.log(id);
+    const checkAuthor = async () => {
+      if (!author) return;
+      const { data, error } = await supabase
+        .from("authors")
+        .select("*")
+        .eq("author", author)
+        .maybeSingle();
+      if (error || !data) {
+        console.error("Authorization failed:", error?.message);
+        navigate("/405");
+      }
+    };
+
+    checkAuthor();
+  }, [author, navigate]);
+  useEffect(() => {
     if (id) {
       const fetchEventData = async () => {
         const { data, error } = await supabase
@@ -39,7 +51,7 @@ function CreateEventPage() {
 
       fetchEventData();
     }
-  }, [id, session, setValue]);
+  }, [author, id, navigate, session, setValue]);
 
   const onSubmit = async (data) => {
     try {
@@ -51,7 +63,7 @@ function CreateEventPage() {
             img_url: data.img_url,
             location: data.location,
             description: data.description,
-            body:data.body,
+            body: data.body,
             start_datetime: data.start_datetime,
             end_datetime: data.end_datetime,
           })
@@ -204,7 +216,6 @@ function CreateEventPage() {
             </p>
           )}
         </div>
-        
 
         <div>
           <label className="block font-semibold">End Date & Time</label>

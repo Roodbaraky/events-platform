@@ -2,7 +2,7 @@
 
 ## TODO:
 - fix role check for administrator
-- add role verification on create-event (if not in authors, 404/redirect)
+- add role verification on create-event (if not in authors)
 - **responsive design** - fix mobile view
   - fix event image on mobile view
 - organise buttons better

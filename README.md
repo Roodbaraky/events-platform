@@ -9,7 +9,6 @@
 - **accessibility** - scan with lightpost, fix errors
 - clearly communicate errors - **error pages & notifs**
 - **loading states** - get a loader
-- actually use Google Auth / manual linking on supabase
 - "security best practices for **user authentication**" ?
 
 

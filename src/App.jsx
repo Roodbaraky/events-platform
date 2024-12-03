@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventPage from "./pages/EventPage";
 import { supabase } from "./supabaseClient";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const {
@@ -53,6 +54,7 @@ function App() {
         <Route path="/:title/:id" element={<EventPage />} />
         <Route path="/:title/:id/edit" element={<CreateEventPage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
   );

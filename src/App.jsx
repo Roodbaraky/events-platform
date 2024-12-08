@@ -7,6 +7,7 @@ import CreateEventPage from "./pages/CreateEventPage";
 import EventPage from "./pages/EventPage";
 import NotFound from "./pages/NotFound";
 import { supabase } from "./supabaseClient";
+import Loader from "./components/Loader";
 
 function App() {
   const {
@@ -45,9 +46,7 @@ function App() {
           path="/"
           element={
             isLoading ? (
-              <div className="flex justify-center items-center h-screen">
-                <div className=" loading loading-spinner rounded-full w-16 h-16"></div>
-              </div>
+             <Loader/>
             ) : (
               <div className="flex flex-col items-center">
                 <Events events={events} />

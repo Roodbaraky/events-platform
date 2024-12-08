@@ -1,30 +1,41 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import EventPageCard from "../components/EventPageCard";
 import { supabase } from "../supabaseClient";
+import Loader from "../components/Loader";
+
 function EventPage() {
   const { id } = useParams();
-  const [eventData, setEventData] = useState(null);
-  useEffect(() => {
-    const getEventData = async () => {
+
+
+  const { data: eventData, isLoading, error } = useQuery({
+    queryKey: ["event", id],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from("events")
         .select("*")
         .eq("id", +id);
 
       if (error) {
-        console.error("Error fetching events:", error);
-      } else {
-        console.log(data[0]);
-        setEventData(data[0]);
+        throw new Error(error.message);
       }
-    };
 
-    getEventData();
-  }, [id]);
+      return data[0];
+    },
+    enabled: !!id, 
+  });
+
+  if (isLoading) {
+    return <Loader/>;
+  }
+
+  if (error) {
+    return <div>Error loading event: {error.message}</div>;
+  }
+
   return (
     <section className="p-4">
-      {eventData != null ? <EventPageCard eventData={eventData} /> : <></>}
+      {eventData ? <EventPageCard eventData={eventData} /> : <div>No event found</div>}
     </section>
   );
 }

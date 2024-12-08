@@ -2,7 +2,7 @@ import EventCard from "./EventCard";
 
 function Events({ events }) {
   return (
-    <section className="flex flex-col items-center justify-center sm:flex-row m-auto p-2 gap-4">
+    <section className="flex flex-wrap items-center justify-center gap-4 p-2">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}

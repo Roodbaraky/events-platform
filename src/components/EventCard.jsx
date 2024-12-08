@@ -38,7 +38,7 @@ function EventCard({ event }) {
       <p className="text-xs font-light">{author}</p>
 
       <div className="absolute inset-0 bg-black bg-opacity-20 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-        <div className="flex gap-2 self-end">
+        <div className="flex gap-2 self-end p-1">
           <SignUp id={id} duration={duration} />
           <AddToCalendar event={event} />
         </div>

@@ -35,14 +35,14 @@ function SignUp({ id, duration }) {
           .eq("id", userId)
           .eq("event_id", id);
 
-        if (error) throw new Error(error.message );
+        if (error) throw new Error(error.message);
       } else {
         const { error } = await supabase.from("user_events").insert({
           id: userId,
           event_id: id,
         });
 
-        if (error) throw new Error(error.message );
+        if (error) throw new Error(error.message);
       }
     },
     onMutate: async () => {
@@ -53,7 +53,7 @@ function SignUp({ id, duration }) {
     },
     onError: (err, _, context) => {
       queryClient.setQueryData(["userEvent", userId, id], context.previousData);
-      console.error("Error:", err.message );
+      console.error("Error:", err.message);
       alert("Operation failed. Please try again.");
     },
     onSettled: () => {
@@ -61,10 +61,17 @@ function SignUp({ id, duration }) {
     },
   });
 
-  const handleClick = () => mutation.mutate();
+  const handleClick = () => {
+    if (userId) {
+      mutation.mutate();
+      return;
+    }
+    document.getElementById("login").showModal();
+
+  };
 
   return (
-    <button
+    <a
       id="signup"
       className={`px-4 py-2 rounded transition-colors duration-300 ${
         mutation.isLoading
@@ -83,7 +90,7 @@ function SignUp({ id, duration }) {
       ) : (
         "Sign Up"
       )}
-    </button>
+    </a>
   );
 }
 

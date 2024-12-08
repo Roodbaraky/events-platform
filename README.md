@@ -1,7 +1,6 @@
 # EventLite
 
 ## TODO:
-- fix role check for administrator
 - **responsive design** - fix mobile view
   - fix event image on mobile view
 - organise buttons better

@@ -1,17 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Events from "./components/Events";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventPage from "./pages/EventPage";
-import { supabase } from "./supabaseClient";
 import NotFound from "./pages/NotFound";
-import { useSession } from "./contexts/UserContext";
+import { supabase } from "./supabaseClient";
 
 function App() {
-  const navigate = useNavigate()
-  const { session } = useSession();
   const {
     data: events,
     isLoading,
@@ -28,20 +25,7 @@ function App() {
     },
   });
 
-  const { data: authors } = useQuery({
-    queryKey: ["authors"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("authors")
-        .select("*")
-        .eq("author", session?.user?.email.split("@")[0])
-        .maybeSingle();
-      if (error) {
-        throw new Error(error.message);
-      }
-      return data;
-    },
-  });
+
 
   if (isError) {
     console.error("Error fetching events:", error);
@@ -66,8 +50,6 @@ function App() {
               </div>
             ) : (
               <div className="flex flex-col items-center">
-                {authors && <a onClick={()=>{navigate('/create-event')}} className="btn w-fit">Create an event</a>}
-
                 <Events events={events} />
               </div>
             )

@@ -5,12 +5,11 @@ import { useSession } from "../contexts/UserContext";
 import { supabase } from "../supabaseClient";
 
 function Nav() {
-  const { session, setSession } = useSession();
+  const { session, logout } = useSession();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (session) {
-      console.log(session.user.email);
       document.getElementById("login").close();
     }
   }, [session]);
@@ -51,10 +50,9 @@ function Nav() {
             <a
               className="btn"
               onClick={async () => {
-                await supabase.auth.signOut()
-                setSession(null)
-                navigate('/')
-                
+                await supabase.auth.signOut();
+                logout
+                navigate("/");
               }}
             >
               Log Out

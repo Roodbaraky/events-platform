@@ -1,9 +1,9 @@
 
-import { useSession } from "../contexts/UserContext";
+// import { useSession } from "../contexts/UserContext";
 
 function AddToCalendar({ event }) {
-  const { title, start_datetime, end_datetime, description, location, id } = event;
-  const { googleAccessToken, loginWithGoogle } = useSession();
+  const { title, start_datetime, end_datetime, description, location } = event;
+  // const { googleAccessToken, loginWithGoogle } = useSession();
 
   const getCalendarUrl = () => {
     const formattedStart = start_datetime.replace(/-|:|\.\d\d\d/g, "");

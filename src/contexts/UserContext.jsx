@@ -5,10 +5,9 @@ import { useGoogleLogin } from "@react-oauth/google";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [session, setSession] = useState(null); 
-  const [googleAccessToken, setGoogleAccessToken] = useState(null); 
-
-
+  const [session, setSession] = useState(null);
+  const [googleAccessToken, setGoogleAccessToken] = useState(null);
+  const [contextKey, setContextKey] = useState(0);
   useEffect(() => {
     const fetchSession = async () => {
       const {
@@ -25,8 +24,10 @@ export const UserProvider = ({ children }) => {
 
     fetchSession();
 
-    const { subscription } = supabase.auth.onAuthStateChange((_, session) => {
-      setSession(session);
+    const { data: subscription } = supabase.auth.onAuthStateChange((_, newSession) => {
+      console.log("Auth state changed, new session:", newSession);
+      setSession(newSession);
+      setContextKey((prevKey) => prevKey + 1); 
     });
 
     return () => {
@@ -44,12 +45,28 @@ export const UserProvider = ({ children }) => {
     },
   });
 
+
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setSession(null);
+      setContextKey((prevKey) => prevKey + 1); 
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ session, setSession, googleAccessToken, loginWithGoogle }}>
+    <UserContext.Provider
+      value={{ session, googleAccessToken, loginWithGoogle, logout }}
+      key={contextKey} 
+    >
       {children}
     </UserContext.Provider>
   );
 };
+
 
 export const useSession = () => {
   const context = useContext(UserContext);

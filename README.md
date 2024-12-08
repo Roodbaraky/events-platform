@@ -2,15 +2,11 @@
 
 ## TODO:
 - fix role check for administrator
-- add role verification on create-event (if not in authors)
 - **responsive design** - fix mobile view
   - fix event image on mobile view
 - organise buttons better
 - **accessibility** - scan with lightpost, fix errors
 - clearly communicate errors - **error pages & notifs**
-- **loading states** - get a loader
-- "security best practices for **user authentication**" ?
-
 
 ## Summary
 

@@ -8,6 +8,8 @@ import EventPage from "./pages/EventPage";
 import NotFound from "./pages/NotFound";
 import { supabase } from "./supabaseClient";
 import Loader from "./components/Loader";
+import HomePage from "./pages/HomePage";
+import MyPage from "./pages/MyPage";
 
 function App() {
   const {
@@ -26,8 +28,6 @@ function App() {
     },
   });
 
-
-
   if (isError) {
     console.error("Error fetching events:", error);
     return (
@@ -38,15 +38,16 @@ function App() {
   }
 
   return (
-    <main className="w-full mx-auto">
+    <main className="w-full mx-auto min-h-screen flex flex-col">
       <Nav className="sticky" />
       <Login />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route
-          path="/"
+          path="/events"
           element={
             isLoading ? (
-             <Loader/>
+              <Loader />
             ) : (
               <div className="flex flex-col items-center">
                 <Events events={events} />
@@ -57,6 +58,7 @@ function App() {
         <Route path="/:title/:id" element={<EventPage />} />
         <Route path="/:title/:id/edit" element={<CreateEventPage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
+        <Route path="/mypage" element={<MyPage/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>

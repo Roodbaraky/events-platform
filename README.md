@@ -1,6 +1,9 @@
 # EventLite
 
 ## TODO:
+- Home Page
+  - Events Page
+  - My Events
 - **responsive design** - fix mobile view
   - fix event image on mobile view
 - organise buttons better

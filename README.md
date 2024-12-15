@@ -9,6 +9,7 @@
 - organise buttons better
 - **accessibility** - scan with lightpost, fix errors
 - clearly communicate errors - **error pages & notifs**
+- finish readme
 
 ## Summary
 

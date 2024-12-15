@@ -58,7 +58,7 @@ function App() {
         <Route path="/:title/:id" element={<EventPage />} />
         <Route path="/:title/:id/edit" element={<CreateEventPage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
-        <Route path="/mypage" element={<MyPage/>}/>
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>

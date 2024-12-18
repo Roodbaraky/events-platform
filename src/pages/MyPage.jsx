@@ -17,7 +17,6 @@ function MyPage() {
   } = useQuery({
     queryKey: ["user_events"],
     queryFn: async () => {
-      console.log(session?.user?.id, "<--");
       const { data, error } = await supabase.rpc("get_user_events", {
         user_id: session?.user?.id,
       });

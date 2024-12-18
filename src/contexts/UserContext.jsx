@@ -27,7 +27,6 @@ export const UserProvider = ({ children }) => {
     fetchSession();
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_, newSession) => {
-      console.log("Auth state changed, new session:", newSession);
       setSession(newSession);
       setContextKey((prevKey) => prevKey + 1); 
     });
@@ -40,7 +39,6 @@ export const UserProvider = ({ children }) => {
   const loginWithGoogle = useGoogleLogin({
     onSuccess: (response) => {
       setGoogleAccessToken(response.access_token);
-      console.log("Google login successful!");
     },
     onError: () => {
       alert("Failed to log in with Google. Please try again.");
@@ -53,7 +51,6 @@ export const UserProvider = ({ children }) => {
       await supabase.auth.signOut();
       setSession(null);
       setContextKey((prevKey) => prevKey + 1); 
-      console.log("User logged out");
     } catch (error) {
       console.error("Error during logout:", error);
     }

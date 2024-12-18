@@ -39,7 +39,7 @@ function Nav() {
   return (
     <div className="flex sm:flex-row justify-between items-center sticky top-0 z-10 bg-base-100">
       <h1
-        className="hidden text-5xl cursor-pointer sm:flex px-2"
+        className="hidden text-5xl cursor-pointer sm:flex px-2 hover:text-primary"
         onClick={() => {
           navigate("/");
         }}

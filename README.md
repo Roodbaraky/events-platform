@@ -14,7 +14,7 @@
 - *add events to their google calendar AFTER signing up*
 - Admins can delete events / edit any events?
 - Netlify placeholder page
-- fix session check in create event
+- Hover on logo for responsiveness
 ## Live Site
 Please find the hosted site [here:](https://eventlite.koo.codes/)
 ```

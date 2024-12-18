@@ -9,6 +9,9 @@
 - organise buttons better
 - **accessibility** - scan with lightpost, fix errors
 - clearly communicate errors - **error pages & notifs**
+- remove console.logs etc
+  - replace console.error with error popup
+  - 
 - finish readme
 
 ## Summary

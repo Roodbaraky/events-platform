@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [googleAccessToken, setGoogleAccessToken] = useState(null);
   const [contextKey, setContextKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchSession = async () => {
       const {
@@ -19,6 +20,7 @@ export const UserProvider = ({ children }) => {
         console.error("Error fetching session:", error);
       } else {
         setSession(session);
+        setIsLoading(false);
       }
     };
 
@@ -59,7 +61,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ session, googleAccessToken, loginWithGoogle, logout }}
+      value={{ session, googleAccessToken, loginWithGoogle, logout, isLoading }}
       key={contextKey} 
     >
       {children}

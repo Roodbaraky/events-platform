@@ -11,7 +11,10 @@
   - 
 - finish readme
 - add hosted site link to repo
-- 
+- *add events to their google calendar AFTER signing up*
+- Admins can delete events / edit any events?
+- Netlify placeholder page
+- fix session check in create event
 ## Live Site
 Please find the hosted site [here:](https://eventlite.koo.codes/)
 ```
@@ -49,7 +52,8 @@ This is also limited to a small quota of signups due to using a free tier SMTP s
 
 ## Installation / How to run
 ### Prerequisites
-
+- Node v22.4.1 or above
+  
 ### Installation
 Clone this repo in your desired directory via:
 ```git clone https://github.com/Roodbaraky/events-platform```
@@ -84,5 +88,16 @@ To run the development server, use the command:
   ➜  Network: http://172.17.0.1:5173/
   ```
 
+### Functionality
+Visitors are able to browse events freely from the Events page, viewing all relevant info etc.
+
+Users must be logged in to an existing account / create an account in order to sign up for an event. Once signed up, users can click "add to calendar" to add an event to their Google calendar, autopopulating with the event details. Similarly, users can unsubscribe from events as they please.
+Users can view events they have signed up for on the *My Page* page, for convenience.
+
+Admins are able to create new events via "Create Event" in the navigation bar, these can be edited at any time.
+
+User authentication is handled via Supabase Auth which uses JWTs in localStorage, valid for 1 hour before refreshing tokens, in line with Supabase's security guidance.
+
+Navigation to pages which require a user/admin to be logged in will prompt the visitor to sign in, if navigated to via the GUI. Attempts to navigate to said pages via URL result in a redirect / error page.
 
 

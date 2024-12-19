@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { formatDuration } from "../../utils/FormatDuration";
-import AddToCalendar from "./AddToCalendarBtn";
-import SignUp from "./SignUpBtn";
+import { useSession } from "../contexts/UserContext";
+import EventSignupControls from "./EventSignupControls";
 
 function EventCard({ event }) {
   const {
@@ -14,8 +13,9 @@ function EventCard({ event }) {
     id,
   } = event;
   const [start_date, start_time] = start_datetime.split("T");
-  const duration = formatDuration(start_datetime, end_datetime);
+  const [, end_time] = end_datetime.split("T");
   const navigate = useNavigate();
+  const { session } = useSession();
 
   return (
     <div
@@ -34,14 +34,13 @@ function EventCard({ event }) {
       />
       <p className="text-wrap text-sm">{description}</p>
       <p className="text-xs">{start_date}</p>
-      <p className="text-xs">{start_time}</p>
+      <p className="text-xs">
+        {start_time} - {end_time}
+      </p>
       <p className="text-xs font-light">{author}</p>
 
       <div className="absolute inset-0 bg-black bg-opacity-20 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-        <div className="flex gap-2 self-end p-1">
-          <SignUp id={id} duration={duration} />
-          <AddToCalendar event={event} />
-        </div>
+        <EventSignupControls eventData={event} session={session} />
       </div>
     </div>
   );

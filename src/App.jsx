@@ -45,9 +45,9 @@ function App() {
     <main className="w-full mx-auto min-h-screen flex flex-col">
       <Nav className="sticky" />
       <Login />
-      <a className="btn" onClick={() => triggerError("Test error")}>
+      {/* <a className="btn" onClick={() => triggerError("Test error")}>
         Cause error
-      </a>
+      </a> */}
       {error && <ErrorPopup errorMessage={error} onClose={clearError} />}
       <Routes>
         <Route path="/" element={<HomePage />} />

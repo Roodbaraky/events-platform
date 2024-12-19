@@ -50,7 +50,7 @@ function App() {
       </a> */}
       {error && <ErrorPopup errorMessage={error} onClose={clearError} />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage events={events}/>} />
         <Route
           path="/events"
           element={

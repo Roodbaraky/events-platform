@@ -4,14 +4,12 @@
 - **responsive design** - fix mobile view
   - fix event image on mobile view
 - **accessibility** - scan with lightpost, fix errors
-- clearly communicate errors - **error pages & notifs**
 - remove console.logs etc
   - replace console.error with error popup
   - 
 - finish readme
-- *add events to their google calendar AFTER signing up*
 - Admins can delete events / edit any events?
-- Netlify placeholder page
+
 ## Live Site
 Please find the hosted site [here:](https://eventlite.koo.codes/)
 ```

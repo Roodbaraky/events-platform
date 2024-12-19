@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 function CarouselEventCard({ event }) {
-  const { title,id, description, start_datetime, img_url } = event;
+  const { title,id, description, start_datetime, img_url, location } = event;
   const navigate = useNavigate();
   return (
     <div
@@ -26,6 +26,9 @@ function CarouselEventCard({ event }) {
             {title}
           </h3>
         </div>
+        <p className="text-sm text-white italic line-clamp-3 text-center">
+          {location}
+        </p>
         <p className="text-sm text-white line-clamp-3 text-center">
           {description}
         </p>

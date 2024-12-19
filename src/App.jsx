@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import ErrorPopup from "./components/ErrorPopup";
 import { useState } from "react";
+import { useError } from "./contexts/ErrorContext";
 
 function App() {
   const {
@@ -29,17 +30,20 @@ function App() {
       return data;
     },
   });
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
+    const {error, clearError, triggerError} = useError()
+  
 
-  const handleError = (message) => {
-    setError(message);
-  };
+  // const handleError = (message) => {
+  //   setError(message);
+  // };
 
-  const closeErrorPopup = () => {
-    setError(null);
-  };
+  // const closeErrorPopup = () => {
+  //   setError(null);
+  // };
   if (isEventsError) {
-    handleError(eventsError)
+    // handleError(eventsError)
+    triggerError(eventsError.message)
 
     return (
       <p className="text-red-500">
@@ -52,8 +56,8 @@ function App() {
     <main className="w-full mx-auto min-h-screen flex flex-col">
       <Nav className="sticky" />
       <Login />
-      <a className="btn" onClick={()=>handleError("Test error")}>Cause error</a>
-      {error && <ErrorPopup errorMessage={error} onClose={closeErrorPopup} />}
+      <a className="btn" onClick={()=>triggerError("Test error")}>Cause error</a>
+      {error && <ErrorPopup errorMessage={error} onClose={clearError} />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

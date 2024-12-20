@@ -19,7 +19,7 @@ function EventCard({ event }) {
 
   return (
     <div
-      className="relative rounded-lg flex flex-col justify-center items-center w-full sm:w-[30%] border border-gray-400 transition-all ease-in-out duration-300 cursor-pointer group"
+      className="group relative flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-gray-400 transition-all duration-300 ease-in-out sm:w-[30%]"
       onClick={(e) => {
         if (!["signup", "AddToCalendar"].includes(e.target.id)) {
           navigate(`/${title}/${id}`);
@@ -28,7 +28,7 @@ function EventCard({ event }) {
     >
       <h2 className="font-semibold">{title}</h2>
       <img
-        className="w-full h-40 object-cover"
+        className="h-40 w-full object-cover"
         src={img_url}
         alt={`Image of ${title}: ${description}`}
       />
@@ -39,7 +39,7 @@ function EventCard({ event }) {
       </p>
       <p className="text-xs font-light">{author}</p>
 
-      <div className="absolute inset-0 bg-black bg-opacity-20 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+      <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <EventSignupControls eventData={event} session={session} />
       </div>
     </div>

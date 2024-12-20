@@ -73,7 +73,7 @@ function EventSignupControls({ eventData, session }) {
   };
 
   return (
-    <div className="flex self-start gap-2">
+    <div className="flex gap-2 self-start">
       <SignUp
         isSignedUp={isSignedUp}
         isLoading={isQueryLoading || mutation.isLoading}

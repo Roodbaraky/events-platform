@@ -11,6 +11,7 @@
 - Limit carousel to X events
 - Update My Page with annotations
 - Add locations to event cards
+- Change 405s to 401
 
 ## Live Site
 

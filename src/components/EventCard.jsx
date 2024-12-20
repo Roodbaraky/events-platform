@@ -11,6 +11,7 @@ function EventCard({ event }) {
     img_url,
     author,
     id,
+    location
   } = event;
   const [start_date, start_time] = start_datetime.split("T");
   const [, end_time] = end_datetime.split("T");
@@ -19,14 +20,14 @@ function EventCard({ event }) {
 
   return (
     <div
-      className="group relative flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-gray-400 transition-all duration-300 ease-in-out sm:w-[30%]"
+      className="group relative flex min-w-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-gray-400 transition-all duration-300 ease-in-out sm:w-[30%]"
       onClick={(e) => {
         if (!["signup", "AddToCalendar"].includes(e.target.id)) {
           navigate(`/${title}/${id}`);
         }
       }}
     >
-      <h2 className="font-semibold">{title}</h2>
+      <h2 className="font-semibold text-lg">{title}</h2>
       <img
         className="h-40 w-full object-cover"
         src={img_url}
@@ -37,6 +38,7 @@ function EventCard({ event }) {
       <p className="text-xs">
         {start_time} - {end_time}
       </p>
+      <p className="text-xs">{location}</p>
       <p className="text-xs font-light">{author}</p>
 
       <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

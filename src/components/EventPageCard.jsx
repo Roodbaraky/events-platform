@@ -12,6 +12,7 @@ function EventPageCard({ eventData }) {
     img_url,
     author,
     body,
+    location
   } = eventData;
   const [start_date, start_time] = start_datetime.split("T");
   const [end_date, end_time] = end_datetime.split("T");
@@ -36,6 +37,8 @@ function EventPageCard({ eventData }) {
               <p className="self-start">{longDate}</p>
               <h2 className="self-start text-5xl font-semibold">{title}</h2>
               <div className="self-start">
+                <h3>Location:</h3>
+                <p>{location}</p>
                 <h3>Date and time:</h3>
                 <p className="self-start">
                   {longDate}

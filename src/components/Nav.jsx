@@ -1,14 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { BiHome } from "react-icons/bi";
+import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useError } from "../contexts/ErrorContext";
 import { useSession } from "../contexts/UserContext";
 import { supabase } from "../supabaseClient";
-import { useQuery } from "@tanstack/react-query";
-import { FaPlus } from "react-icons/fa";
 
 function Nav() {
   const { session, logout } = useSession();
   const navigate = useNavigate();
+  const { triggerError } = useError();
 
   const {
     data: authors,
@@ -26,7 +28,7 @@ function Nav() {
         .maybeSingle();
 
       if (error) {
-        throw new Error(error.message);
+        triggerError("Error fetching data, please try again");
       }
       return data;
     },

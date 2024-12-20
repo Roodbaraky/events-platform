@@ -10,13 +10,13 @@ function HomePage({ events }) {
       <Carousel events={events} />
       <div className="flex gap-2 sm:gap-4 md:gap-8">
         <a
-          className="btn btn-primary sm:btn-lg"
+          className="btn btn-primary"
           onClick={() => navigate("/events")}
         >
           Browse Events
         </a>
         <a
-          className="btn btn-outline sm:btn-lg"
+          className="btn btn-outline"
           onClick={() => {
             session
               ? navigate("/mypage")

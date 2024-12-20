@@ -12,13 +12,13 @@ export default function NotFound() {
       <div className="flex space-x-4">
         <button
           onClick={() => navigate(-2)}
-          className="btn btn-primary rounded-md px-4 py-2 text-white"
+          className="btn btn-primary rounded-md px-4 py-2 "
         >
           Go Back
         </button>
         <Link
           to="/"
-          className="btn btn-success rounded-md px-4 py-2 text-white"
+          className="btn btn-success rounded-md px-4 py-2 "
         >
           Go to Homepage
         </Link>

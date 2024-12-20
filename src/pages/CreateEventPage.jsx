@@ -21,7 +21,7 @@ function CreateEventPage() {
     const checkAuthor = async () => {
       if (isLoading) return;
       if (!author) {
-        navigate("/405");
+        navigate("/401");
         return;
       }
 
@@ -33,7 +33,7 @@ function CreateEventPage() {
 
       if (error || !data) {
         console.error("Authorization failed:", error?.message);
-        navigate("/405");
+        navigate("/401");
       }
     };
 

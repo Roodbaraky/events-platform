@@ -5,9 +5,11 @@ import EventCard from "../components/EventCard";
 import Loader from "../components/Loader";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useError } from "../contexts/ErrorContext";
 
 function MyPage() {
   const { session, isLoading } = useSession();
+  const { triggerError } = useError();
   const navigate = useNavigate();
 
   const {
@@ -59,12 +61,18 @@ function MyPage() {
     }
   }, [isLoading, navigate, session]);
 
+  useEffect(() => {
+    if (isError) {
+      triggerError(error?.message);
+    }
+  }, [error?.message, isError, triggerError]);
+
   return (
     <section>
       <h1 className="m-1 text-4xl underline">My Account</h1>
       <div className="m-2">
         <p>Email: {session?.user?.email}</p>
-        <p>Account type: {userData? "Staff" : "User"}</p>
+        <p>Account type: {userData ? "Staff" : "User"}</p>
         <p>Subscribed Events: {events?.length}</p>
       </div>
 

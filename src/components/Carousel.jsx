@@ -15,7 +15,7 @@ function Carousel({ events }) {
     return <div className="skeleton h-96 w-[900px] max-w-full"></div>;
 
   return (
-    <div className="relative flex w-full items-center justify-center">
+    <div className="relative flex w-full items-center justify-center overflow-hidden">
       <div
         className="flex transition-transform duration-1000 ease-in-out"
         style={{

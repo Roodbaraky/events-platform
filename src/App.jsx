@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import ErrorPopup from "./components/ErrorPopup";
 import { useError } from "./contexts/ErrorContext";
+import { Footer } from "./components/Footer";
 
 function App() {
   const {
@@ -69,6 +70,7 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </main>
   );
 }

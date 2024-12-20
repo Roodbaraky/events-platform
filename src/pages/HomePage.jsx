@@ -7,14 +7,16 @@ function HomePage({ events }) {
   const { session } = useSession();
   return (
     <section className="flex flex-grow flex-col items-center justify-center gap-4">
-      <h1 className="text-7xl">Welcome.</h1>
       <Carousel events={events} />
-      <div className="flex gap-2">
-        <a className="btn btn-primary" onClick={() => navigate("/events")}>
+      <div className="flex gap-2 sm:gap-4 md:gap-8">
+        <a
+          className="btn btn-primary sm:btn-lg"
+          onClick={() => navigate("/events")}
+        >
           Browse Events
         </a>
         <a
-          className="btn btn-outline"
+          className="btn btn-outline sm:btn-lg"
           onClick={() => {
             session
               ? navigate("/mypage")

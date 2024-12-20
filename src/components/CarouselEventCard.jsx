@@ -6,7 +6,7 @@ function CarouselEventCard({ event }) {
 
   return (
     <div
-      className="group relative flex h-96 w-[900px] max-w-full cursor-pointer flex-col overflow-hidden rounded-lg bg-white shadow-lg"
+      className="group relative flex h-96 md:h-fit md:aspect-video w-[1200px] max-w-full cursor-pointer flex-col overflow-hidden rounded-lg bg-white shadow-lg"
       onClick={(e) => {
         if (!["signup", "AddToCalendar"].includes(e.target.id)) {
           navigate(`/${title}/${id}`);

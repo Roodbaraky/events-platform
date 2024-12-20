@@ -11,7 +11,7 @@ export default function NotFound() {
       </p>
       <div className="flex space-x-4">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(-2)}
           className="btn btn-primary rounded-md px-4 py-2 text-white"
         >
           Go Back

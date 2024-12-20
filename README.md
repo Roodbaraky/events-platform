@@ -9,6 +9,9 @@
   - 
 - finish readme
 - Admins can delete events / edit any events?
+- Add title / desc to carousel on mobile
+- Limit carousel to X events
+- Update My Page with annotations
 
 ## Live Site
 Please find the hosted site [here:](https://eventlite.koo.codes/)
@@ -82,6 +85,8 @@ To run the development server, use the command:
   ➜  Network: http://172.19.0.1:5173/
   ➜  Network: http://172.17.0.1:5173/
   ```
+
+  Visiting any of the above addresses in the browser will take you to the site instance running in development mode.
 
 ### Functionality
 Visitors are able to browse events freely from the Events page, viewing all relevant info etc.

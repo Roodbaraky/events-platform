@@ -11,7 +11,8 @@ function Carousel({ events }) {
     return () => clearInterval(interval);
   }, [events]);
 
-  if (!events || events.length === 0) return null;
+  if (!events || events.length === 0)
+    return <div className="skeleton w-[900px] max-w-full h-96"></div>;
 
   return (
     <div className="relative w-full flex items-center justify-center">

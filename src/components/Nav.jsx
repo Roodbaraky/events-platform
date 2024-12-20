@@ -69,9 +69,14 @@ function Nav() {
           </a>
         ) : (
           <div className="flex gap-2">
-            <p className="flex items-center">
+            <a
+              className="flex cursor-pointer items-center hover:text-primary"
+              onClick={() => {
+                navigate("/mypage");
+              }}
+            >
               {session.user.email.split("@")[0]}
-            </p>
+            </a>
             {authors && !isFetching && !isError && (
               <>
                 <a

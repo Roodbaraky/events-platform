@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSession } from "../contexts/UserContext";
 import { supabase } from "../supabaseClient";
 import Loader from "../components/Loader";
+import { useError } from "../contexts/ErrorContext";
 
 function CreateEventPage() {
   const { id } = useParams();
   const { session, isLoading } = useSession();
+  const { triggerError } = useError();
   const author = session?.user?.email.split("@")[0];
   const {
     register,
@@ -32,13 +34,13 @@ function CreateEventPage() {
         .maybeSingle();
 
       if (error || !data) {
-        console.error("Authorization failed:", error?.message);
+        triggerError("Authorisation failed, ");
         navigate("/401");
       }
     };
 
     checkAuthor();
-  }, [author, isLoading, navigate]);
+  }, [author, isLoading, navigate, triggerError]);
 
   useEffect(() => {
     if (id) {
@@ -50,8 +52,7 @@ function CreateEventPage() {
           .single();
 
         if (error) {
-          console.error("Error fetching event data:", error.message);
-          alert("Failed to load event data.");
+          triggerError("Failed to load event data.");
         } else if (data) {
           Object.keys(data).forEach((key) => setValue(key, data[key]));
         }
@@ -59,7 +60,7 @@ function CreateEventPage() {
 
       fetchEventData();
     }
-  }, [author, id, navigate, session, setValue]);
+  }, [author, id, navigate, session, setValue, triggerError]);
 
   const onSubmit = async (data) => {
     try {
@@ -78,10 +79,8 @@ function CreateEventPage() {
           .eq("id", id);
 
         if (error) {
-          console.error("Error updating event:", error.message);
-          alert("Failed to update event. Please try again.");
+          triggerError("Failed to update event. Please try again.");
         } else {
-          alert("Event updated successfully!");
           navigate(`/event/${id}`);
         }
         return;
@@ -114,19 +113,17 @@ function CreateEventPage() {
         .select("id");
 
       if (error) {
-        console.error("Error creating event:", error.message);
-        alert("Failed to create event. Please try again.");
+        triggerError("Failed to create event. Please try again.");
       } else {
         const newEventID = insertedData[0]?.id;
-        alert("Event created successfully!");
         if (newEventID) {
           navigate(`/${title}/${newEventID}`);
         }
         reset();
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.error("Unexpected error:", error);
-      alert("Something went wrong. Please try again.");
+      triggerError("Something went wrong. Please try again.");
     }
   };
 

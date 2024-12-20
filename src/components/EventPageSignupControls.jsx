@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 import AddToCalendar from "./AddToCalendarBtn";
 import EditBtn from "./EditBtn";
 import SignUp from "./SignUpBtn";
-import useError from "../contexts/ErrorContext";
+import {useError} from "../contexts/ErrorContext";
 
 function EventSignupControls({ eventData, session }) {
   const { id, author } = eventData;
@@ -61,7 +61,6 @@ function EventSignupControls({ eventData, session }) {
     },
     onError: (err, _, context) => {
       queryClient.setQueryData(["userEvent", userId, id], context.previousData);
-
       triggerError("Operation failed. Please try again.");
     },
     onSettled: () => {

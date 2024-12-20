@@ -3,11 +3,12 @@ import { supabase } from "../supabaseClient";
 import AddToCalendar from "./AddToCalendarBtn";
 import EditBtn from "./EditBtn";
 import SignUp from "./SignUpBtn";
+import useError from "../contexts/ErrorContext";
 
 function EventSignupControls({ eventData, session }) {
   const { id, author } = eventData;
   const userId = session?.user?.id;
-
+  const { triggerError } = useError();
   const queryClient = useQueryClient();
 
   const { data: isSignedUp, isLoading: isQueryLoading } = useQuery({
@@ -21,7 +22,7 @@ function EventSignupControls({ eventData, session }) {
         .maybeSingle();
 
       if (error) {
-        throw new Error(error.message);
+        triggerError("Error retrieving data, please try again");
       }
 
       return !!data;
@@ -38,14 +39,18 @@ function EventSignupControls({ eventData, session }) {
           .eq("id", userId)
           .eq("event_id", id);
 
-        if (error) throw new Error(error.message);
+        if (error) {
+          triggerError("Error retrieving data, please try again");
+        }
       } else {
         const { error } = await supabase.from("user_events").insert({
           id: userId,
           event_id: id,
         });
 
-        if (error) throw new Error(error.message);
+        if (error) {
+          triggerError("Error retrieving data, please try again");
+        }
       }
     },
     onMutate: async () => {
@@ -56,8 +61,8 @@ function EventSignupControls({ eventData, session }) {
     },
     onError: (err, _, context) => {
       queryClient.setQueryData(["userEvent", userId, id], context.previousData);
-      console.error("Error:", err.message);
-      alert("Operation failed. Please try again.");
+
+      triggerError("Operation failed. Please try again.");
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["userEvent", userId, id] });

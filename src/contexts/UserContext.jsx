@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useError } from "./ErrorContext";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const { triggerError } = useError();
   const [session, setSession] = useState(null);
   const [googleAccessToken, setGoogleAccessToken] = useState(null);
   const [contextKey, setContextKey] = useState(0);
@@ -17,7 +19,7 @@ export const UserProvider = ({ children }) => {
       } = await supabase.auth.getSession();
 
       if (error) {
-        console.error("Error fetching session:", error);
+        triggerError("Error fetching session:");
       } else {
         setSession(session);
         setIsLoading(false);
@@ -36,14 +38,14 @@ export const UserProvider = ({ children }) => {
     return () => {
       subscription?.unsubscribe();
     };
-  }, []);
+  }, [triggerError]);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: (response) => {
       setGoogleAccessToken(response.access_token);
     },
     onError: () => {
-      alert("Failed to log in with Google. Please try again.");
+      triggerError("Failed to log in with Google. Please try again.");
     },
   });
 
@@ -52,8 +54,9 @@ export const UserProvider = ({ children }) => {
       await supabase.auth.signOut();
       setSession(null);
       setContextKey((prevKey) => prevKey + 1);
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.error("Error during logout:", error);
+      triggerError("Error during logout:");
     }
   };
 

@@ -11,13 +11,13 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId={clientId}>
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <ErrorProvider>
+      <ErrorProvider>
+        <UserProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </ErrorProvider>
-      </UserProvider>
+        </UserProvider>
+      </ErrorProvider>
     </QueryClientProvider>
   </GoogleOAuthProvider>,
 );

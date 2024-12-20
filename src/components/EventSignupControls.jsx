@@ -3,12 +3,14 @@ import { supabase } from "../supabaseClient";
 import AddToCalendar from "./AddToCalendarBtn";
 import EditBtn from "./EditBtn";
 import SignUp from "./SignUpBtn";
+import { useError } from "../contexts/ErrorContext";
 
 function EventSignupControls({ eventData, session }) {
   const { id, author } = eventData;
   const userId = session?.user?.id;
 
   const queryClient = useQueryClient();
+  const {triggerError} = useError();
 
   const { data: isSignedUp, isLoading: isQueryLoading } = useQuery({
     queryKey: ["userEvent", userId, id],
@@ -56,8 +58,7 @@ function EventSignupControls({ eventData, session }) {
     },
     onError: (err, _, context) => {
       queryClient.setQueryData(["userEvent", userId, id], context.previousData);
-      console.error("Error:", err.message);
-      alert("Operation failed. Please try again.");
+      triggerError("Operation failed. Please try again.");
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["userEvent", userId, id] });

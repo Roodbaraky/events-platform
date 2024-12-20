@@ -36,7 +36,6 @@ function MyPage() {
         navigate("/405");
       }
     }
-    
   }, [isLoading, navigate, session]);
 
   return (

@@ -7,8 +7,11 @@ import Loader from "../components/Loader";
 function EventPage() {
   const { id } = useParams();
 
-
-  const { data: eventData, isLoading, error } = useQuery({
+  const {
+    data: eventData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["event", id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -22,11 +25,11 @@ function EventPage() {
 
       return data[0];
     },
-    enabled: !!id, 
+    enabled: !!id,
   });
 
   if (isLoading) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   if (error) {
@@ -35,7 +38,11 @@ function EventPage() {
 
   return (
     <section className="p-4">
-      {eventData ? <EventPageCard eventData={eventData} /> : <div>No event found</div>}
+      {eventData ? (
+        <EventPageCard eventData={eventData} />
+      ) : (
+        <div>No event found</div>
+      )}
     </section>
   );
 }

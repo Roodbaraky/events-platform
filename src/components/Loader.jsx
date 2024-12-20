@@ -1,9 +1,7 @@
-
-
 function Loader() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className=" loading loading-spinner rounded-full w-16 h-16"></div>
+    <div className="flex h-screen items-center justify-center">
+      <div className="loading loading-spinner h-16 w-16 rounded-full"></div>
     </div>
   );
 }

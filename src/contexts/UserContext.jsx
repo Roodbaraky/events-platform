@@ -26,10 +26,12 @@ export const UserProvider = ({ children }) => {
 
     fetchSession();
 
-    const { data: subscription } = supabase.auth.onAuthStateChange((_, newSession) => {
-      setSession(newSession);
-      setContextKey((prevKey) => prevKey + 1); 
-    });
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (_, newSession) => {
+        setSession(newSession);
+        setContextKey((prevKey) => prevKey + 1);
+      },
+    );
 
     return () => {
       subscription?.unsubscribe();
@@ -45,12 +47,11 @@ export const UserProvider = ({ children }) => {
     },
   });
 
-
   const logout = async () => {
     try {
       await supabase.auth.signOut();
       setSession(null);
-      setContextKey((prevKey) => prevKey + 1); 
+      setContextKey((prevKey) => prevKey + 1);
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -59,13 +60,12 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{ session, googleAccessToken, loginWithGoogle, logout, isLoading }}
-      key={contextKey} 
+      key={contextKey}
     >
       {children}
     </UserContext.Provider>
   );
 };
-
 
 export const useSession = () => {
   const context = useContext(UserContext);

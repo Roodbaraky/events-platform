@@ -10,7 +10,11 @@ function Nav() {
   const { session, logout } = useSession();
   const navigate = useNavigate();
 
-  const { data: authors, isFetching, isError } = useQuery({
+  const {
+    data: authors,
+    isFetching,
+    isError,
+  } = useQuery({
     queryKey: ["authors", session?.user?.email],
     queryFn: async () => {
       if (!session) return null;
@@ -29,7 +33,6 @@ function Nav() {
     enabled: !!session,
   });
 
-
   useEffect(() => {
     if (session) {
       document.getElementById("login")?.close();
@@ -37,9 +40,9 @@ function Nav() {
   }, [session]);
 
   return (
-    <div className="flex sm:flex-row justify-between items-center sticky top-0 z-10 bg-base-100">
+    <div className="sticky top-0 z-10 flex items-center justify-between bg-base-100 sm:flex-row">
       <h1
-        className="hidden text-5xl cursor-pointer sm:flex px-2 hover:text-primary"
+        className="hidden cursor-pointer px-2 text-5xl hover:text-primary sm:flex"
         onClick={() => {
           navigate("/");
         }}
@@ -47,12 +50,12 @@ function Nav() {
         EventLite
       </h1>
       <div
-        className="px-4 btn sm:hidden mx-1"
+        className="btn mx-1 px-4 sm:hidden"
         onClick={() => {
           navigate("/");
         }}
       >
-        <BiHome className="scale-150 pointer-events-none" />
+        <BiHome className="pointer-events-none scale-150" />
       </div>
       <div className="p-2">
         {!session ? (
@@ -70,30 +73,30 @@ function Nav() {
               {session.user.email.split("@")[0]}
             </p>
             {authors && !isFetching && !isError && (
-               <>
-               <a
-                 onClick={() => {
-                   navigate("/create-event");
-                 }}
-                 className="hidden sm:flex btn btn-primary w-fit"
-               >
-                 Create an event
-               </a>
-               <a
-                 onClick={() => {
-                   navigate("/create-event");
-                 }}
-                 className="sm:hidden btn btn-primary w-fit"
-               >
-                 <FaPlus />
-               </a>
-             </>
+              <>
+                <a
+                  onClick={() => {
+                    navigate("/create-event");
+                  }}
+                  className="btn btn-primary hidden w-fit sm:flex"
+                >
+                  Create an event
+                </a>
+                <a
+                  onClick={() => {
+                    navigate("/create-event");
+                  }}
+                  className="btn btn-primary w-fit sm:hidden"
+                >
+                  <FaPlus />
+                </a>
+              </>
             )}
             <a
               className="btn"
               onClick={async () => {
                 await supabase.auth.signOut();
-                logout(); 
+                logout();
                 navigate("/");
               }}
             >

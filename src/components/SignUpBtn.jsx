@@ -1,14 +1,13 @@
-
 function SignUp({ isSignedUp, isLoading, onClick }) {
   return (
     <button
       id="signup"
-      className={`px-4 py-2 rounded transition-colors duration-300 ${
+      className={`rounded px-4 py-2 transition-colors duration-300 ${
         isLoading
-          ? "bg-gray-400 cursor-not-allowed"
+          ? "cursor-not-allowed bg-gray-400"
           : isSignedUp
-          ? "bg-red-500 hover:bg-red-700 text-white"
-          : "bg-blue-500 hover:bg-blue-700 text-white"
+            ? "bg-red-500 text-white hover:bg-red-700"
+            : "bg-blue-500 text-white hover:bg-blue-700"
       }`}
       onClick={onClick}
       disabled={isLoading}

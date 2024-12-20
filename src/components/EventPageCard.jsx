@@ -20,21 +20,21 @@ function EventPageCard({ eventData }) {
   const { session } = useSession();
 
   return (
-    <div className="relative rounded-lg flex w-auto min-h-screen flex-col justify-start items-center m-auto p-4">
-      <div className="flex flex-col items-center w-full max-h-full">
+    <div className="relative m-auto flex min-h-screen w-auto flex-col items-center justify-start rounded-lg p-4">
+      <div className="flex max-h-full w-full flex-col items-center">
         <img
-          className="w-full sm:aspect-ultraCinematic aspect-video object-cover rounded-3xl shadow-xl"
+          className="aspect-video w-full rounded-3xl object-cover shadow-xl sm:aspect-ultraCinematic"
           src={img_url}
           alt={title}
         />
-        <div className="flex mt-2 sm:hidden ">
+        <div className="mt-2 flex sm:hidden">
           <EventPageSignupControls session={session} eventData={eventData} />
         </div>
-        <div className="flex justify-between w-full p-2">
-          <div className="flex flex-col min-w-3/5 gap-2">
+        <div className="flex w-full justify-between p-2">
+          <div className="min-w-3/5 flex flex-col gap-2">
             <div className="flex flex-col">
               <p className="self-start">{longDate}</p>
-              <h2 className="font-semibold text-5xl self-start">{title}</h2>
+              <h2 className="self-start text-5xl font-semibold">{title}</h2>
               <div className="self-start">
                 <h3>Date and time:</h3>
                 <p className="self-start">

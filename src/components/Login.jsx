@@ -8,16 +8,16 @@ export default function Login() {
       <dialog id="login" className="modal">
         <div className="modal-box p-2">
           <div className="modal-action flex flex-col">
-            <form method="dialog" >
+            <form method="dialog">
               <div className="flex justify-end">
                 <button className="btn">x</button>
               </div>
             </form>
-              <Auth
-                supabaseClient={supabase}
-                appearance={{ theme: ThemeSupa }}
-                providers={[]}
-              />
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              providers={[]}
+            />
           </div>
         </div>
       </dialog>

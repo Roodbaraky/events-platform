@@ -18,7 +18,7 @@ function AddToCalendar({ event }) {
   return (
     <button
       id="AddToCalendar"
-      className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
+      className="rounded bg-green-500 px-4 py-2 text-white transition-colors duration-300 hover:bg-green-700"
       onClick={() => {
         handleAddToCalendar();
       }}

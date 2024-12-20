@@ -19,5 +19,5 @@ createRoot(document.getElementById("root")).render(
         </ErrorProvider>
       </UserProvider>
     </QueryClientProvider>
-  </GoogleOAuthProvider>
+  </GoogleOAuthProvider>,
 );

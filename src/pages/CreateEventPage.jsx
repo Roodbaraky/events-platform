@@ -131,8 +131,8 @@ function CreateEventPage() {
   };
 
   return (
-    <div className="max-w-4xl w-full mx-auto p-6 bg-white shadow rounded">
-      <h1 className="text-2xl font-bold mb-4">Create Event</h1>
+    <div className="mx-auto w-full max-w-4xl rounded bg-white p-6 shadow">
+      <h1 className="mb-4 text-2xl font-bold">Create Event</h1>
       {isLoading ? (
         <Loader />
       ) : (
@@ -142,12 +142,12 @@ function CreateEventPage() {
             <input
               type="text"
               {...register("title", { required: "Title is required" })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.title ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.title && (
-              <p className="text-red-500 text-sm">{errors.title.message}</p>
+              <p className="text-sm text-red-500">{errors.title.message}</p>
             )}
           </div>
 
@@ -156,12 +156,12 @@ function CreateEventPage() {
             <input
               type="text"
               {...register("img_url")}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.img_url ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.img_url && (
-              <p className="text-red-500 text-sm">{errors.img_url.message}</p>
+              <p className="text-sm text-red-500">{errors.img_url.message}</p>
             )}
           </div>
 
@@ -171,12 +171,12 @@ function CreateEventPage() {
               {...register("location", {
                 required: "location is required",
               })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.location ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.location && (
-              <p className="text-red-500 text-sm">{errors.location.message}</p>
+              <p className="text-sm text-red-500">{errors.location.message}</p>
             )}
           </div>
 
@@ -186,13 +186,13 @@ function CreateEventPage() {
               {...register("description", {
                 required: "Blurb is required",
               })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.description ? "border-red-500" : "border-gray-300"
               }`}
               rows="1"
             />
             {errors.description && (
-              <p className="text-red-500 text-sm">
+              <p className="text-sm text-red-500">
                 {errors.description.message}
               </p>
             )}
@@ -203,13 +203,13 @@ function CreateEventPage() {
               {...register("body", {
                 required: "Description is required",
               })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.body ? "border-red-500" : "border-gray-300"
               }`}
               rows="4"
             />
             {errors.body && (
-              <p className="text-red-500 text-sm">{errors.body.message}</p>
+              <p className="text-sm text-red-500">{errors.body.message}</p>
             )}
           </div>
           <div>
@@ -219,12 +219,12 @@ function CreateEventPage() {
               {...register("start_datetime", {
                 required: "Start date and time are required",
               })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.start_datetime ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.start_datetime && (
-              <p className="text-red-500 text-sm">
+              <p className="text-sm text-red-500">
                 {errors.start_datetime.message}
               </p>
             )}
@@ -240,12 +240,12 @@ function CreateEventPage() {
                   new Date(value) > new Date() ||
                   "End date must be in the future",
               })}
-              className={`p-2 rounded w-full border ${
+              className={`w-full rounded border p-2 ${
                 errors.end_datetime ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.end_datetime && (
-              <p className="text-red-500 text-sm">
+              <p className="text-sm text-red-500">
                 {errors.end_datetime.message}
               </p>
             )}
@@ -253,7 +253,7 @@ function CreateEventPage() {
 
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="rounded bg-blue-500 py-2 text-white hover:bg-blue-600"
           >
             {id ? "Save Changes" : "Create Event"}
           </button>

@@ -42,7 +42,7 @@ function App() {
   }
 
   return (
-    <main className="w-full mx-auto min-h-screen flex flex-col">
+    <main className="mx-auto flex min-h-screen w-full flex-col">
       <Nav className="sticky" />
       <Login />
       {/* <a className="btn" onClick={() => triggerError("Test error")}>
@@ -50,7 +50,7 @@ function App() {
       </a> */}
       {error && <ErrorPopup errorMessage={error} onClose={clearError} />}
       <Routes>
-        <Route path="/" element={<HomePage events={events}/>} />
+        <Route path="/" element={<HomePage events={events} />} />
         <Route
           path="/events"
           element={

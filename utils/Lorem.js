@@ -33,4 +33,4 @@ export const lorem = `Lorem ipsum dolor sit amet consectetur adipisicing elit. A
               ipsum dolor sit amet consectetur adipisicing elit. Nam quos amet
               omnis. Odio perspiciatis, adipisci consectetur quia quae nam sint
               culpa magnam quod error qui iure distinctio laboriosam commodi
-              incidunt!`
+              incidunt!`;

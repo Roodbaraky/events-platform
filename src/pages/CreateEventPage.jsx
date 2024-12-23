@@ -5,8 +5,10 @@ import { useSession } from "../contexts/UserContext";
 import { supabase } from "../supabaseClient";
 import Loader from "../components/Loader";
 import { useError } from "../contexts/ErrorContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 function CreateEventPage() {
+  const queryClient = useQueryClient();
   const { id } = useParams();
   const { session, isLoading } = useSession();
   const { triggerError } = useError();
@@ -82,6 +84,7 @@ function CreateEventPage() {
         if (error) {
           triggerError("Failed to update event. Please try again.");
         } else {
+          queryClient.invalidateQueries(["events"]);
           navigate(`/event/${id}`);
         }
         return;

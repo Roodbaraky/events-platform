@@ -34,7 +34,7 @@ function Carousel({ events }) {
         ))}
       </div>
       <button
-        className="btn btn-ghost absolute left-4 top-1/2 z-10 -translate-y-1/2 transform rounded-s-2xl p-2 text-white opacity-50 hover:opacity-100"
+        className="btn btn-ghost absolute left-4 top-1/2 z-10 -translate-y-1/2 transform rounded-s-2xl p-2 text-2xl text-white opacity-50 hover:opacity-100"
         onClick={() =>
           setCurrentIndex((prevIndex) =>
             prevIndex === 0 ? events.length - 1 : prevIndex - 1,
@@ -44,7 +44,7 @@ function Carousel({ events }) {
         ◀
       </button>
       <button
-        className="btn btn-ghost absolute right-4 top-1/2 z-10 -translate-y-1/2 transform rounded-e-2xl p-2 text-white opacity-50 hover:opacity-100"
+        className="btn btn-ghost absolute right-4 top-1/2 z-10 -translate-y-1/2 transform rounded-e-2xl p-2 text-2xl text-white opacity-50 hover:opacity-100"
         onClick={() =>
           setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length)
         }

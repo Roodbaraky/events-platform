@@ -6,7 +6,7 @@ import SignUp from "./SignUpBtn";
 import {useError} from "../contexts/ErrorContext";
 
 function EventSignupControls({ eventData, session }) {
-  const { id } = eventData;
+  const { id, title } = eventData;
   const userId = session?.user?.id;
   const { triggerError } = useError();
   const queryClient = useQueryClient();
@@ -103,7 +103,7 @@ function EventSignupControls({ eventData, session }) {
         onClick={handleToggleSignup}
       />
       {isSignedUp && <AddToCalendar event={eventData} />}
-      {isAuthor && <EditBtn />}
+      {isAuthor && <EditBtn title={title} id ={id} />}
     </div>
   );
 }

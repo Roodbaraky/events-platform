@@ -75,6 +75,7 @@ function CreateEventPage() {
             body: data.body,
             start_datetime: data.start_datetime,
             end_datetime: data.end_datetime,
+            author: author,
           })
           .eq("id", id);
 
@@ -121,7 +122,7 @@ function CreateEventPage() {
         }
         reset();
       }
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       triggerError("Something went wrong. Please try again.");
     }

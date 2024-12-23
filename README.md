@@ -1,18 +1,5 @@
 # EventLite
 
-## TODO:
-
-- **accessibility** - scan with lightpost, fix errors
-- remove console.logs etc
-  - replace console.error with error popup
-  -
-- finish readme
-- Admins can delete events / edit any events?
-- Limit carousel to X events
-- Update My Page with annotations
-- Add locations to event cards
-- Make buttons consistent
-
 ## Live Site
 
 Please find the hosted site [here:](https://eventlite.koo.codes/)

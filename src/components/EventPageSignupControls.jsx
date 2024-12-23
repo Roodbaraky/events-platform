@@ -6,7 +6,7 @@ import SignUp from "./SignUpBtn";
 import {useError} from "../contexts/ErrorContext";
 
 function EventSignupControls({ eventData, session }) {
-  const { id, author } = eventData;
+  const { id } = eventData;
   const userId = session?.user?.id;
   const { triggerError } = useError();
   const queryClient = useQueryClient();
@@ -29,6 +29,25 @@ function EventSignupControls({ eventData, session }) {
     },
     enabled: !!userId,
   });
+
+  const { data: isAuthor } = useQuery({
+    queryKey: ["isAuthor", userId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("authors")
+        .select("id")
+        .eq("id", userId)
+        .maybeSingle();
+
+      if (error) {
+        triggerError("Error checking author status");
+      }
+
+      return !!data;
+    },
+    enabled: !!userId,
+  });
+
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -84,7 +103,7 @@ function EventSignupControls({ eventData, session }) {
         onClick={handleToggleSignup}
       />
       {isSignedUp && <AddToCalendar event={eventData} />}
-      {session?.user?.email?.split("@")[0] === author && <EditBtn />}
+      {isAuthor && <EditBtn />}
     </div>
   );
 }

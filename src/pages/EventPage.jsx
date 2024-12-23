@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EventPageCard from "../components/EventPageCard";
 import { supabase } from "../supabaseClient";
 import Loader from "../components/Loader";
 
 function EventPage() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const {
     data: eventData,
     isLoading,
@@ -38,6 +38,14 @@ function EventPage() {
 
   return (
     <section className="p-4">
+      <button
+        className="btn"
+        onClick={() => {
+          navigate("/events");
+        }}
+      >
+        Back to events
+      </button>
       {eventData ? (
         <EventPageCard eventData={eventData} />
       ) : (

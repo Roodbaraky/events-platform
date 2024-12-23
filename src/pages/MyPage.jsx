@@ -68,7 +68,7 @@ function MyPage() {
   }, [error?.message, isError, triggerError]);
 
   return (
-    <section>
+    <section className="min-h-screen"> 
       <h1 className="m-1 text-4xl underline">My Account</h1>
       <div className="m-2">
         <p>Email: {session?.user?.email}</p>

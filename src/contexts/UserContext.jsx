@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-import { useGoogleLogin } from "@react-oauth/google";
 import { useError } from "./ErrorContext";
 
 const UserContext = createContext();
@@ -8,7 +7,6 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const { triggerError } = useError();
   const [session, setSession] = useState(null);
-  const [googleAccessToken, setGoogleAccessToken] = useState(null);
   const [contextKey, setContextKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -40,21 +38,12 @@ export const UserProvider = ({ children }) => {
     };
   }, [triggerError]);
 
-  const loginWithGoogle = useGoogleLogin({
-    onSuccess: (response) => {
-      setGoogleAccessToken(response.access_token);
-    },
-    onError: () => {
-      triggerError("Failed to log in with Google. Please try again.");
-    },
-  });
-
   const logout = async () => {
     try {
       await supabase.auth.signOut();
       setSession(null);
       setContextKey((prevKey) => prevKey + 1);
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       triggerError("Error during logout:");
     }
@@ -62,7 +51,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ session, googleAccessToken, loginWithGoogle, logout, isLoading }}
+      value={{ session, logout, isLoading }}
       key={contextKey}
     >
       {children}

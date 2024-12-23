@@ -23,9 +23,9 @@ function CarouselEventCard({ event }) {
 
       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 bg-gradient-to-t from-black p-2 opacity-100 transition-opacity duration-300 sm:opacity-30 sm:group-hover:opacity-100">
         <div className="via-black to-transparent p-2 opacity-90">
-          <h3 className="text-center text-xl font-semibold text-white">
+          <h2 className="text-center text-xl font-semibold text-white">
             {title}
-          </h3>
+          </h2>
         </div>
         <p className="line-clamp-3 text-center text-sm italic text-white">
           {location}

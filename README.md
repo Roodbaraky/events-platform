@@ -8,6 +8,12 @@ Please find the hosted site [here:](https://eventlite.koo.codes/)
 https://eventlite.koo.codes/
 ```
 
+Please find a video walkthrough of the site [here:](https://www.loom.com/share/86b87ace3c00465296c210ad6d03c9fc?sid=860642c9-1056-45dd-a59b-67e169fa9980)
+
+```
+https://www.loom.com/share/86b87ace3c00465296c210ad6d03c9fc?sid=860642c9-1056-45dd-a59b-67e169fa9980
+```
+
 ## Summary
 
 EventLite is an events sharing/signup site for a local business, allowing users to signup to events and add them to their google calendars and admins to create and edit events.

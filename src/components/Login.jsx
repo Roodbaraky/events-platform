@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 export default function Login() {
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   return (
     <>
       <dialog id="login" className="modal">
@@ -15,7 +16,15 @@ export default function Login() {
             </form>
             <Auth
               supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa}}
+              appearance={{
+                theme: ThemeSupa,
+                style: {
+                  input: {
+                    color: isDarkMode ? "#ffffff" : "#000000",
+                    border: "1px solid #64748b",
+                  },
+                },
+              }}
               providers={[]}
             />
           </div>

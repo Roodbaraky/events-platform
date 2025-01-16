@@ -121,6 +121,7 @@ function CreateEventPage() {
       } else {
         const newEventID = insertedData[0]?.id;
         if (newEventID) {
+          queryClient.invalidateQueries(["events"]);
           navigate(`/${title}/${newEventID}`);
         }
         reset();

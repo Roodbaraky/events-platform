@@ -254,7 +254,7 @@ function CreateEventPage() {
 
           <button
             type="submit"
-            className="rounded bg-blue-500 py-2 text-white hover:bg-blue-600"
+            className="btn rounded bg-blue-500 py-2 text-white hover:bg-blue-600"
           >
             {id ? "Save Changes" : "Create Event"}
           </button>
